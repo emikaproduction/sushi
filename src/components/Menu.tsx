@@ -69,7 +69,7 @@ export function Menu({ filter, setFilter, cat, setCat }: { filter: Filter; setFi
   const current = cats.find((c) => c.id === cat && c.visible.length) ?? cats.find((c) => c.visible.length)!
 
   return (
-    <section className="py-[100px]" id="menu" aria-labelledby="menu-title">
+    <section className="py-section" id="menu" aria-labelledby="menu-title">
       <div className={wrap}>
         <SectionHead eyebrow="Wybierz coś dla siebie" title="Menu" id="menu-title" />
 

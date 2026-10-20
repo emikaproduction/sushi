@@ -68,7 +68,7 @@ export function Reveal({ children, delay = 0, className, as = 'div' }: { childre
 
 export function SectionHead({ eyebrow: label, title, id }: { eyebrow: string; title: string; id?: string }) {
   return (
-    <div className="mb-12 grid justify-items-center gap-5 text-center">
+    <div className="mb-8 grid justify-items-center gap-4 text-center md:mb-12 md:gap-5">
       <Reveal as="span" className={eyebrow}>
         {label}
       </Reveal>

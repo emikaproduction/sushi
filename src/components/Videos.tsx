@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
 import { CONTACT, REELS } from '../data/menu'
-import { btn, center, wrap } from '../lib/styles'
+import { btn, center, cx, wrap } from '../lib/styles'
+import { Slider } from './Slider'
 import { Caret, SectionHead } from './ui'
 
 // Okładki-zaślepki: wideo z Facebooka ładuje się dopiero po kliknięciu
@@ -15,11 +16,11 @@ function Reel({ id, i }: { id: string; i: number }) {
   return (
     <motion.div
       data-hover
-      className="aspect-9/16 overflow-hidden rounded-card border-2 border-ink bg-paper-deep"
+      className="aspect-9/16 w-[min(300px,72vw)] overflow-hidden rounded-card border-2 border-ink bg-paper-deep"
       initial={{ opacity: 0, y: 60, rotate: i % 2 ? 2 : -2 }}
       whileInView={{ opacity: 1, y: 0, rotate: 0 }}
       viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: (i % 3) * 0.1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: Math.min(i, 3) * 0.1 }}
     >
       <AnimatePresence mode="wait">
         {play ? (
@@ -51,19 +52,21 @@ function Reel({ id, i }: { id: string; i: number }) {
 
 export function Videos() {
   return (
-    <section className="pt-[120px] pb-[100px]" id="wideo" aria-labelledby="video-title">
+    <section className="py-section" id="wideo" aria-labelledby="video-title">
       <div className={wrap}>
         <SectionHead eyebrow="Prosto z fanpage'a" title="Zza lady" id="video-title" />
-        <div className="mx-auto grid max-w-[980px] grid-cols-3 gap-4 max-md:grid-cols-2 max-sm:max-w-[360px] max-sm:grid-cols-1">
-          {REELS.map((id, i) => (
-            <Reel key={id} id={id} i={i} />
-          ))}
-        </div>
-        <div className={center}>
-          <a href={CONTACT.facebook} className={btn('ghost', 'lg')} target="_blank" rel="noreferrer">
-            Więcej na Facebooku <Caret />
-          </a>
-        </div>
+      </div>
+
+      <Slider label="Filmy z fanpage'a">
+        {REELS.map((id, i) => (
+          <Reel key={id} id={id} i={i} />
+        ))}
+      </Slider>
+
+      <div className={cx(wrap, center)}>
+        <a href={CONTACT.facebook} className={btn('ghost', 'lg')} target="_blank" rel="noreferrer">
+          Więcej na Facebooku <Caret />
+        </a>
       </div>
     </section>
   )

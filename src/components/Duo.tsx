@@ -27,9 +27,9 @@ const CARDS = [
 
 export function Duo({ onPick }: { onPick: (f: Filter) => void }) {
   return (
-    <section className="pt-[100px] pb-10" id="o-nas" aria-labelledby="duo-title">
+    <section className="py-section" id="o-nas" aria-labelledby="duo-title">
       <div className={wrap}>
-        <SectionHead eyebrow="Poznaj naszą ekipę" title="Panda (i pandka)" id="duo-title" />
+        <SectionHead eyebrow="Poznaj naszą ekipę" title="Panda & Pandka Ruda" id="duo-title" />
         <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
           {CARDS.map(({ who, Mascot, title, text, filter, cta }, i) => (
             <motion.article

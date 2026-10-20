@@ -1,7 +1,8 @@
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { CONTACT } from '../data/menu'
 import { Panda, RedPanda } from './Mascots'
+import { MenuToggle, MobileMenu } from './MobileMenu'
 import { btn, ctas, cx, eyebrow, wrap } from '../lib/styles'
 import { Caret, Phone, SplitText, Status } from './ui'
 import { useOpenStatus } from '../lib/hours'
@@ -12,12 +13,13 @@ const ease = [0.16, 1, 0.3, 1] as const
 // animacje hero startują dopiero, gdy intro zjedzie z ekranu
 const D = document.documentElement.classList.contains('no-intro') ? 0 : 1.5
 
+// w kolejności sekcji na stronie (App.tsx)
 const NAV_LINKS = [
+  ['#o-nas', 'O nas'],
   ['#menu', 'Menu'],
   ['#sushigo', 'SushiGO'],
   ['#zestawy', 'Zestawy'],
   ['#wideo', 'Wideo'],
-  ['#o-nas', 'O nas'],
   ['#kontakt', 'Kontakt'],
 ]
 
@@ -26,12 +28,22 @@ export function Nav() {
   const { scrollY } = useScroll()
   const [scrolled, setScrolled] = useState(false)
   useMotionValueEvent(scrollY, 'change', (v) => setScrolled(v > 12))
+  const [menu, setMenu] = useState(false)
+  const [origin, setOrigin] = useState('100% 0')
+  const closeMenu = useCallback(() => setMenu(false), [])
+  const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const r = e.currentTarget.getBoundingClientRect()
+    setOrigin(`${r.left + r.width / 2}px ${r.top + r.height / 2}px`)
+    setMenu((m) => !m)
+  }
   return (
     // na górze strony przezroczysty i nałożony na hero; po przewinięciu półprzezroczysty, rozmyty, z cieniem
     <header
       className={cx(
-        'sticky top-0 z-50 -mb-(--nav-h) text-ink transition-[background-color,box-shadow,backdrop-filter] duration-350',
-        scrolled && 'bg-paper-light/72 shadow-[0_1px_0_rgb(31_27_24/0.08),0_10px_30px_-12px_rgb(111_53_23/0.35)] backdrop-blur-[16px] backdrop-saturate-[1.3]',
+        'sticky top-0 -mb-(--nav-h) text-ink transition-[background-color,box-shadow,backdrop-filter] duration-350',
+        // otwarte menu leży pod paskiem (z-65), ale nad pływającym przyciskiem „Zamów” (z-60)
+        menu ? 'z-70' : 'z-50',
+        scrolled && !menu && 'bg-paper-light/72 shadow-[0_1px_0_rgb(31_27_24/0.08),0_10px_30px_-12px_rgb(111_53_23/0.35)] backdrop-blur-[16px] backdrop-saturate-[1.3]',
       )}
     >
       <div className={cx(wrap, 'flex h-(--nav-h) items-center justify-between gap-5')}>
@@ -52,8 +64,10 @@ export function Nav() {
         </nav>
         <div className="flex items-center gap-4">
           <Status open={open} label={label} className="max-lg:hidden" />
+          <MenuToggle open={menu} onClick={toggleMenu} className="md:hidden" />
         </div>
       </div>
+      <MobileMenu open={menu} onClose={closeMenu} links={NAV_LINKS} origin={origin} />
     </header>
   )
 }

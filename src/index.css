@@ -32,6 +32,9 @@
 
   --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
 
+  /* pionowy odstęp sekcji (py-section, pt-section…): 48 px na telefonie → 96 px na desktopie */
+  --spacing-section: clamp(48px, 7.5vw, 96px);
+
   /* sm < 600 px (telefon), md < 900 px, lg ≥ 1100 px — używane głównie jako max-sm: / max-md: / max-lg: */
   --breakpoint-*: initial;
   --breakpoint-sm: 600px;

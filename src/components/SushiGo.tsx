@@ -39,7 +39,7 @@ export function SushiGo() {
   const src = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(`https://www.facebook.com/reel/${REEL}/`)}&show_text=false&width=360&height=640&autoplay=true`
 
   return (
-    <section className="overflow-hidden pt-[120px] pb-[60px]" id="sushigo" ref={ref} aria-labelledby="sg-title">
+    <section className="overflow-hidden py-section" id="sushigo" ref={ref} aria-labelledby="sg-title">
       <div className={cx(wrap, 'grid grid-cols-[1.05fr_1fr] items-center gap-[clamp(32px,5vw,72px)] max-md:grid-cols-1')}>
         <div className="grid justify-items-start gap-[18px]">
           <motion.span className={eyebrow} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease }}>

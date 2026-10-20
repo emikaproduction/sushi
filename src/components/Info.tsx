@@ -35,7 +35,7 @@ export function About() {
   const words =
     'Działamy od 2021 roku, spełniając marzenie o tym, by mieszkańcy Pisza i okolic mogli jeść sushi najwyższej jakości. Klasyczne rolki, autorskie pozycje wegańskie i alternatywy dla tych, którzy nie lubią surowej ryby.'.split(' ')
   return (
-    <section className="py-[100px]" ref={ref} aria-labelledby="about-title">
+    <section className="py-section" ref={ref} aria-labelledby="about-title">
       <div className={wrap}>
         <p className="mx-auto max-w-[1100px] text-center font-display text-[clamp(32px,5.4vw,72px)] leading-[.98] tracking-[.02em] uppercase">
           {words.map((w, i) => (
@@ -89,7 +89,7 @@ const contactCard = 'grid content-start gap-3.5 rounded-card border-2 border-ink
 export function Contact() {
   const { open, label, today } = useOpenStatus()
   return (
-    <section className="pt-[60px] pb-[120px]" id="kontakt" aria-labelledby="contact-title">
+    <section className="py-section" id="kontakt" aria-labelledby="contact-title">
       <div className={wrap}>
         <SectionHead eyebrow="Zamówienia tylko telefonicznie" title="Zadzwoń" id="contact-title" />
         <motion.a
