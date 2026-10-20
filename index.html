@@ -8,11 +8,30 @@
     <meta name="theme-color" content="#f3e3cf" />
     <title>Sushi dla Ciebie — sushi na wynos w Piszu</title>
     <meta name="description" content="Sushi dla Ciebie — świeże sushi na wynos w Piszu od 2021 roku. Klasyczne rolki, autorskie pozycje wegańskie i alternatywy dla osób, które nie lubią surowej ryby. Zamówienia: 513 528 454." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- font tytułu hero (logo z intro jest od razu w HTML niżej) -->
+    <link rel="preload" href="/fonts/gang.ttf" as="font" type="font/ttf" crossorigin />
+    <script>
+      // intro tylko przy pierwszej wizycie w sesji i bez „ogranicz ruch” — decyzja zapada przed pierwszym malowaniem
+      try {
+        if (sessionStorage.getItem('intro-seen') || matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('no-intro')
+      } catch {
+        /* brak dostępu do storage — intro się pokaże */
+      }
+    </script>
+    <style>
+      /* intro jest w statycznym HTML, żeby logo (element LCP) malowało się od razu, bez czekania na JS.
+         Logo nie startuje z małej skali — LCP liczy rozmiar z pierwszego malowania.
+         Plik logo jest spłaszczony na kolor tła intro (#f3e3cf) — bez kanału alfa waży ~5× mniej. */
+      #intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #f3e3cf; transition: transform .8s cubic-bezier(.7, 0, .2, 1); }
+      #intro img { width: clamp(180px, 30vw, 320px); height: auto; animation: intro-pop .9s cubic-bezier(.34, 1.56, .64, 1) backwards; transition: transform .8s, opacity .8s; }
+      #intro.out { transform: translateY(-100%); }
+      #intro.out img { transform: scale(.8); opacity: 0; }
+      .no-intro #intro { display: none; }
+      @keyframes intro-pop { from { transform: rotate(-120deg); opacity: 0; } }
+    </style>
   </head>
   <body>
+    <div id="intro" aria-hidden="true"><img src="/img/logo.webp" srcset="/img/logo-360.webp 360w, /img/logo.webp 472w" sizes="clamp(180px, 30vw, 320px)" alt="" width="472" height="598" fetchpriority="high" /></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import type { Filter } from './Menu'
 import { Panda, RedPanda } from './Mascots'
+import { btn, pieces, wrap } from '../lib/styles'
 import { Caret, SectionHead } from './ui'
 
 const ease = [0.16, 1, 0.3, 1] as const
@@ -26,29 +27,29 @@ const CARDS = [
 
 export function Duo({ onPick }: { onPick: (f: Filter) => void }) {
   return (
-    <section className="duo" aria-labelledby="duo-title">
-      <div className="wrap">
+    <section className="pt-[100px] pb-10" id="o-nas" aria-labelledby="duo-title">
+      <div className={wrap}>
         <SectionHead eyebrow="Poznaj naszą ekipę" title="Panda (i pandka)" id="duo-title" />
-        <div className="duo-grid">
+        <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
           {CARDS.map(({ who, Mascot, title, text, filter, cta }, i) => (
             <motion.article
               key={who}
-              className="duo-card"
+              className="grid grid-cols-2 items-end gap-6 overflow-hidden rounded-feature border-2 border-ink bg-paper-light p-[clamp(24px,3vw,40px)] max-sm:grid-cols-1"
               initial={{ opacity: 0, y: 60, rotate: i ? 3 : -3 }}
               whileInView={{ opacity: 1, y: 0, rotate: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, ease, delay: i * 0.15 }}
             >
-              <motion.div className="duo-art" whileHover={{ scale: 1.06, rotate: i ? 4 : -4 }} transition={{ type: 'spring', stiffness: 200, damping: 12 }}>
+              <motion.div className="-mb-[clamp(24px,3vw,40px)] w-[min(100%,260px)] origin-bottom self-end justify-self-center max-sm:order-2 max-sm:w-[46%]" whileHover={{ scale: 1.06, rotate: i ? 4 : -4 }} transition={{ type: 'spring', stiffness: 200, damping: 12 }}>
                 <Mascot />
               </motion.div>
-              <div className="duo-copy">
-                <span className="pieces">{who}</span>
-                <h3>{title}</h3>
-                <p>{text}</p>
+              <div className="grid justify-items-start gap-3.5 self-center">
+                <span className={pieces}>{who}</span>
+                <h3 className="font-display text-[clamp(32px,3.4vw,48px)] leading-[.92] tracking-[.02em] text-ink uppercase">{title}</h3>
+                <p className="text-base text-ink-soft">{text}</p>
                 <a
                   href="#menu"
-                  className="btn btn-primary"
+                  className={btn('primary')}
                   onClick={() => onPick(filter)}
                 >
                   {cta} <Caret />

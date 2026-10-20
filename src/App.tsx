@@ -29,8 +29,8 @@ export default function App() {
         <Menu filter={filter} setFilter={setFilter} cat={cat} setCat={setCat} />
         <SushiGo />
         <Sets />
-        <Videos />
         <About />
+        <Videos />
         <Contact />
       </main>
       <Footer />

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
 import { CONTACT, REELS } from '../data/menu'
+import { btn, center, wrap } from '../lib/styles'
 import { Caret, SectionHead } from './ui'
 
 // Okładki-zaślepki: wideo z Facebooka ładuje się dopiero po kliknięciu
@@ -13,7 +14,8 @@ function Reel({ id, i }: { id: string; i: number }) {
   const src = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(href)}&show_text=false&width=320&height=568&autoplay=true`
   return (
     <motion.div
-      className="reel"
+      data-hover
+      className="aspect-9/16 overflow-hidden rounded-card border-2 border-ink bg-paper-deep"
       initial={{ opacity: 0, y: 60, rotate: i % 2 ? 2 : -2 }}
       whileInView={{ opacity: 1, y: 0, rotate: 0 }}
       viewport={{ once: true, amount: 0.25 }}
@@ -23,6 +25,7 @@ function Reel({ id, i }: { id: string; i: number }) {
         {play ? (
           <motion.iframe
             key="v"
+            className="block size-full border-0"
             src={src}
             title={`Film z fanpage'a Sushi dla Ciebie #${i + 1}`}
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -31,14 +34,14 @@ function Reel({ id, i }: { id: string; i: number }) {
             animate={{ opacity: 1 }}
           />
         ) : (
-          <motion.button key="c" className="reel-cover" onClick={() => setPlay(true)} exit={{ opacity: 0, scale: 1.05 }} whileHover="hover" aria-label={`Odtwórz film #${i + 1} z Facebooka`}>
-            <motion.img src={`/img/${COVERS[i % COVERS.length]}.webp`} alt="" loading="lazy" variants={{ hover: { scale: 1.1, rotate: 4 } }} />
-            <motion.span className="play" variants={{ hover: { scale: 1.15 } }}>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
+          <motion.button key="c" className="relative grid size-full place-items-center overflow-hidden" onClick={() => setPlay(true)} exit={{ opacity: 0, scale: 1.05 }} whileHover="hover" aria-label={`Odtwórz film #${i + 1} z Facebooka`}>
+            <motion.img className="absolute inset-[10%_6%_22%] h-[68%] w-[88%] object-contain" src={`/img/${COVERS[i % COVERS.length]}.webp`} alt="" loading="lazy" variants={{ hover: { scale: 1.1, rotate: 4 } }} />
+            <motion.span className="relative grid size-[72px] place-items-center rounded-full bg-red text-white" variants={{ hover: { scale: 1.15 } }}>
+              <svg className="ml-1 size-[30px]" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M8 5v14l11-7z" fill="currentColor" />
               </svg>
             </motion.span>
-            <span className="reel-label">Rolka #{String(i + 1).padStart(2, '0')}</span>
+            <span className="absolute inset-x-4 bottom-[18px] text-left font-display text-[28px] tracking-[.03em] text-ink uppercase">Rolka #{String(i + 1).padStart(2, '0')}</span>
           </motion.button>
         )}
       </AnimatePresence>
@@ -48,16 +51,16 @@ function Reel({ id, i }: { id: string; i: number }) {
 
 export function Videos() {
   return (
-    <section className="videos" id="wideo" aria-labelledby="video-title">
-      <div className="wrap">
+    <section className="pt-[120px] pb-[100px]" id="wideo" aria-labelledby="video-title">
+      <div className={wrap}>
         <SectionHead eyebrow="Prosto z fanpage'a" title="Zza lady" id="video-title" />
-        <div className="reels">
+        <div className="mx-auto grid max-w-[980px] grid-cols-3 gap-4 max-md:grid-cols-2 max-sm:max-w-[360px] max-sm:grid-cols-1">
           {REELS.map((id, i) => (
             <Reel key={id} id={id} i={i} />
           ))}
         </div>
-        <div className="center">
-          <a href={CONTACT.facebook} className="btn btn-ghost btn-lg" target="_blank" rel="noreferrer">
+        <div className={center}>
+          <a href={CONTACT.facebook} className={btn('ghost', 'lg')} target="_blank" rel="noreferrer">
             Więcej na Facebooku <Caret />
           </a>
         </div>

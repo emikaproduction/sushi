@@ -1,7 +1,7 @@
 import { motion, useMotionValue, useReducedMotion, useSpring } from 'motion/react'
 import { useEffect, useState } from 'react'
 
-const HOVER = 'a, button, .card, .set-card, .reel, input'
+const HOVER = 'a, button, input, [data-hover]'
 
 /** Czerwona kropka za kursorem; nad linkami, przyciskami i kartami rośnie w obręcz (jak w sushi-v1). */
 export function Cursor() {
@@ -35,9 +35,9 @@ export function Cursor() {
 
   if (reduce || !fine) return null
   return (
-    <motion.div className="cursor" aria-hidden="true" style={{ x: sx, y: sy, opacity: visible ? 1 : 0 }}>
+    <motion.div className="pointer-events-none fixed top-0 left-0 z-90 -mt-[7px] -ml-[7px] size-3.5 transition-opacity duration-200" aria-hidden="true" style={{ x: sx, y: sy, opacity: visible ? 1 : 0 }}>
       <motion.span
-        className="cursor-dot"
+        className="absolute inset-0 rounded-full"
         animate={big ? { scale: 4, backgroundColor: 'rgba(226, 26, 9, 0)', boxShadow: 'inset 0 0 0 0.45px rgba(226, 26, 9, 1), 0 0 0 0.35px rgba(251, 243, 232, 0.9)' } : { scale: 1, backgroundColor: 'rgba(226, 26, 9, 1)', boxShadow: 'inset 0 0 0 0px rgba(226, 26, 9, 0), 0 0 0 0px rgba(251, 243, 232, 0)' }}
         transition={{ type: 'spring', stiffness: 300, damping: 24 }}
       />

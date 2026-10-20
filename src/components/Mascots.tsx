@@ -5,13 +5,19 @@ type Props = {
   className?: string
   /** obrót w stopniach — np. sprężyna podpięta pod kursor */
   tilt?: MotionValue<number>
+  /** szerokość na ekranie — przeglądarka dobiera z niej mniejszy lub pełny plik */
+  sizes?: string
 }
 
-export function Panda({ className, tilt }: Props) {
+const SIZES = '(max-width: 600px) 150px, 300px'
+
+export function Panda({ className, tilt, sizes = SIZES }: Props) {
   return (
     <motion.img
-      className={`mascot-img ${className ?? ''}`}
+      className={`block h-auto w-full select-none ${className ?? ''}`}
       src="/img/panda.webp"
+      srcSet="/img/panda-320.webp 320w, /img/panda.webp 638w"
+      sizes={sizes}
       alt="Panda — maskotka Sushi dla Ciebie"
       width={638}
       height={966}
@@ -21,11 +27,13 @@ export function Panda({ className, tilt }: Props) {
   )
 }
 
-export function RedPanda({ className, tilt }: Props) {
+export function RedPanda({ className, tilt, sizes = SIZES }: Props) {
   return (
     <motion.img
-      className={`mascot-img ${className ?? ''}`}
+      className={`block h-auto w-full select-none ${className ?? ''}`}
       src="/img/pandka.webp"
+      srcSet="/img/pandka-300.webp 300w, /img/pandka.webp 574w"
+      sizes={sizes}
       alt="Pandka ruda — maskotka Sushi dla Ciebie"
       width={574}
       height={1000}
