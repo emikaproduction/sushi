@@ -1,4 +1,5 @@
 import { motion, type MotionValue } from 'motion/react'
+import { IMG } from '../lib/assets'
 
 // Postacie klienta (panda i pandka ruda w strojach kucharzy) — pliki od klienta, przycięte do WebP.
 type Props = {
@@ -15,8 +16,8 @@ export function Panda({ className, tilt, sizes = SIZES }: Props) {
   return (
     <motion.img
       className={`block h-auto w-full select-none ${className ?? ''}`}
-      src="/img/panda.webp"
-      srcSet="/img/panda-320.webp 320w, /img/panda.webp 638w"
+      src={`${IMG}panda.webp`}
+      srcSet={`${IMG}panda-320.webp 320w, ${IMG}panda.webp 638w`}
       sizes={sizes}
       alt="Panda — maskotka Sushi dla Ciebie"
       width={638}
@@ -31,8 +32,8 @@ export function RedPanda({ className, tilt, sizes = SIZES }: Props) {
   return (
     <motion.img
       className={`block h-auto w-full select-none ${className ?? ''}`}
-      src="/img/pandka.webp"
-      srcSet="/img/pandka-300.webp 300w, /img/pandka.webp 574w"
+      src={`${IMG}pandka.webp`}
+      srcSet={`${IMG}pandka-300.webp 300w, ${IMG}pandka.webp 574w`}
       sizes={sizes}
       alt="Pandka ruda — maskotka Sushi dla Ciebie"
       width={574}

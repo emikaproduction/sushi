@@ -6,6 +6,7 @@ import { MenuToggle, MobileMenu } from './MobileMenu'
 import { btn, ctas, cx, eyebrow, wrap } from '../lib/styles'
 import { Caret, Phone, SplitText, Status } from './ui'
 import { useOpenStatus } from '../lib/hours'
+import { IMG } from '../lib/assets'
 
 const ease = [0.16, 1, 0.3, 1] as const
 
@@ -48,7 +49,7 @@ export function Nav() {
     >
       <div className={cx(wrap, 'flex h-(--nav-h) items-center justify-between gap-5')}>
         <a href="#top" className="inline-flex items-center gap-2.5 font-brand text-[22px] leading-none tracking-[.02em] text-red uppercase" aria-label="Sushi dla Ciebie — początek strony">
-          <img src="/img/logo-mark-96.webp" alt="" width="40" height="40" className="size-10 object-contain" />
+          <img src={`${IMG}logo-mark-96.webp`} alt="" width="40" height="40" className="size-10 object-contain" />
           <span className="max-sm:hidden">Sushi dla Ciebie</span>
         </a>
         <nav className="flex gap-[26px] text-sm font-medium uppercase max-lg:gap-[18px] max-md:hidden" aria-label="Główna nawigacja">
@@ -178,8 +179,8 @@ export function Hero() {
       <motion.div className="relative z-2 grid justify-items-center gap-[26px]" style={{ scale: titleScale, y: titleY }}>
         <motion.img
           className="-mb-1.5 h-auto w-[clamp(84px,9vw,120px)] cursor-pointer"
-          src="/img/logo-mark-240.webp"
-          srcSet="/img/logo-mark-96.webp 96w, /img/logo-mark-240.webp 240w"
+          src={`${IMG}logo-mark-240.webp`}
+          srcSet={`${IMG}logo-mark-96.webp 96w, ${IMG}logo-mark-240.webp 240w`}
           sizes="clamp(84px, 9vw, 120px)"
           alt=""
           width={240}

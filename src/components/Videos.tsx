@@ -4,6 +4,7 @@ import { CONTACT, REELS } from '../data/menu'
 import { btn, center, cx, wrap } from '../lib/styles'
 import { Slider } from './Slider'
 import { Caret, SectionHead } from './ui'
+import { IMG } from '../lib/assets'
 
 // Okładki-zaślepki: wideo z Facebooka ładuje się dopiero po kliknięciu
 // (szybsza strona i brak ciasteczek Facebooka, dopóki ktoś nie zechce obejrzeć).
@@ -36,7 +37,7 @@ function Reel({ id, i }: { id: string; i: number }) {
           />
         ) : (
           <motion.button key="c" className="relative grid size-full place-items-center overflow-hidden" onClick={() => setPlay(true)} exit={{ opacity: 0, scale: 1.05 }} whileHover="hover" aria-label={`Odtwórz film #${i + 1} z Facebooka`}>
-            <motion.img className="absolute inset-[10%_6%_22%] h-[68%] w-[88%] object-contain" src={`/img/${COVERS[i % COVERS.length]}.webp`} alt="" loading="lazy" variants={{ hover: { scale: 1.1, rotate: 4 } }} />
+            <motion.img className="absolute inset-[10%_6%_22%] h-[68%] w-[88%] object-contain" src={`${IMG}${COVERS[i % COVERS.length]}.webp`} alt="" loading="lazy" variants={{ hover: { scale: 1.1, rotate: 4 } }} />
             <motion.span className="relative grid size-[72px] place-items-center rounded-full bg-red text-white" variants={{ hover: { scale: 1.15 } }}>
               <svg className="ml-1 size-[30px]" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M8 5v14l11-7z" fill="currentColor" />

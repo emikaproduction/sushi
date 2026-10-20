@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 import { CONTACT } from '../data/menu'
 import { btn, ctas, cx, eyebrow, wrap } from '../lib/styles'
 import { Caret, Phone } from './ui'
+import { IMG } from '../lib/assets'
 
 // Nowy produkt z fanpage'a: SushiGO — sushi w tubie „na drogę” (reel z 2026 r.).
 const REEL = '1394267902599868'
@@ -100,7 +101,7 @@ export function SushiGo() {
                 <motion.img
                   key="i"
                   className="block size-full object-cover"
-                  src="/img/sushigo.webp"
+                  src={`${IMG}sushigo.webp`}
                   alt="Panda i pandka ruda z tubami SushiGO"
                   width={532}
                   height={560}

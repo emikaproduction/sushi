@@ -5,6 +5,7 @@ import { Panda, RedPanda } from './Mascots'
 import { btn, center, cx, pieces, wrap } from '../lib/styles'
 import { Caret, Phone, Pin, Reveal, SectionHead, SplitText, Status } from './ui'
 import { hoursText, useOpenStatus } from '../lib/hours'
+import { IMG } from '../lib/assets'
 
 const YEAR = new Date().getFullYear()
 
@@ -179,7 +180,7 @@ export function Footer() {
             <motion.div className={cx(stand, 'bottom-[calc(80%+.24em)] left-1/2 -ml-[.2em] w-[.4em]')} aria-hidden="true" {...drop(0.6)}>
               <motion.img
                 className="block h-auto w-full"
-                src="/img/logo-mark-240.webp"
+                src={`${IMG}logo-mark-240.webp`}
                 alt=""
                 width="240"
                 height="226"

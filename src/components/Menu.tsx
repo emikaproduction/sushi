@@ -2,6 +2,7 @@ import { AnimatePresence, LayoutGroup, motion } from 'motion/react'
 import { MENU, type Item, type Price } from '../data/menu'
 import { cx, wrap } from '../lib/styles'
 import { SectionHead, Tag } from './ui'
+import { IMG } from '../lib/assets'
 
 export type Filter = 'all' | 'veg' | 'noraw'
 
@@ -41,7 +42,7 @@ function Card({ it, pcs }: { it: Item; pcs?: string }) {
       {it.img && (
         <div className="relative grid aspect-4/3 place-items-center overflow-hidden border-b-2 border-ink bg-paper-deep before:absolute before:aspect-square before:w-[72%] before:rounded-full before:bg-paper before:opacity-90 before:shadow-[inset_0_0_0_10px_var(--color-rust)]">
           <motion.img
-            src={`/img/${it.img}.webp`}
+            src={`${IMG}${it.img}.webp`}
             alt={it.name}
             className="relative h-[84%] w-[74%] object-contain"
             loading="lazy"

@@ -3,6 +3,7 @@ import { SETS } from '../data/menu'
 import { pieces, wrap } from '../lib/styles'
 import { Slider } from './Slider'
 import { SectionHead, Tag } from './ui'
+import { IMG } from '../lib/assets'
 
 function SetCard({ s, i }: { s: (typeof SETS)[number]; i: number }) {
   return (
@@ -16,7 +17,7 @@ function SetCard({ s, i }: { s: (typeof SETS)[number]; i: number }) {
       whileHover="hover"
     >
       <div className="relative grid h-[clamp(220px,34vh,320px)] place-items-center overflow-hidden border-b-2 border-ink bg-paper-deep p-5">
-        <motion.img className="size-full object-contain" src={`/img/${s.img}.webp`} alt={`${s.name} — ${s.pcs} sztuk`} loading="lazy" variants={{ hover: { scale: 1.06, rotate: -2 } }} transition={{ type: 'spring', stiffness: 200, damping: 16 }} />
+        <motion.img className="size-full object-contain" src={`${IMG}${s.img}.webp`} alt={`${s.name} — ${s.pcs} sztuk`} loading="lazy" variants={{ hover: { scale: 1.06, rotate: -2 } }} transition={{ type: 'spring', stiffness: 200, damping: 16 }} />
         {s.tag && (
           <Tag kind="hot" className="absolute top-3.5 left-3.5">
             {s.tag}
